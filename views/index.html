@@ -13,7 +13,7 @@
 
 <body>
     <div class="form">
-        <div>
+        <div class="button">
             <button id="create-modal">RunDataSchool</button>
             <button>RunDataHome</button>
         </div>
@@ -21,8 +21,8 @@
         
     </div>
 
-
-    <div id="modalCreateStaff" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- modal  -->
+    <div id="modalListStudent" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
@@ -69,10 +69,14 @@
 
     function runModal() {
         $('#create-modal').on('click', function () {
-            $('#modalCreateStaff').modal('show')
+            $('#modalListStudent').modal('show')
         })
     }
     runModal();
+
+    
+
+
 
     function renderUser(user){
         let str = `
