@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="form">
+        <button id="create-modal">RunData</button>
+    </div>
+
+
+    <div id="modalCreateStaff" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">List</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table id="tbListUser" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã</th>
+                                <th>Họ và tên </th>
+                                <th>Email </th>
+                                <th>Số điện thoại </th>
+                                <th>Địa chỉ</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnCreate">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    fetch('http://localhost:3000/student/')
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+
+
+
+    function runModal() {
+        $('#create-modal').on('click', function () {
+            $('#modalCreateStaff').modal('show')
+        })
+    }
+    runModal();
+
+    function renderUser(user){
+        let str = `
+                <tr id="tr_${user.id}" onclick=mess()>
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>  
+                    <td>${user.phone}</td>  
+                    <td>${user.address}</td>                           
+                </tr>
+        `;
+        return str;
+    }
+
+    function getAllUser(){
+        $.ajax({
+            header: {
+                "accept": "application/json",
+                "content-type": "application/json"
+            },
+            type: "GET",
+            url: 'http://localhost:3000/student/'
+        })
+            .done((data) => {
+                console.log(data)
+                $.each(data ,(i, item)=>{
+
+                    let str = renderUser(item);
+                    $('#tbListUser tbody').append(str)
+
+                })
+            })
+
+    }
+    getAllUser();
+
+  
+
+  
+</script>
+
+
+</html>
