@@ -10,10 +10,18 @@
     
 }
 
-.form button {
+
+.form button:nth-child(1) {
     position: absolute;
     font-size: 25px;
-    right: 605px;
+    right: 790px;
+    top: 200px;
+    
+}
+.form button:nth-child(2) {
+    position: absolute;
+    font-size: 25px;
+    right: 400px;
     top: 200px;
     
 }
